@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stylish Interactive Registration Form</title>
+<!-- Google Fonts Import -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+    /* Base styles for the entire page */
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #71b7e6, #9b59b6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+        box-sizing: border-box;
+        margin: 0;
+    }
+
+    /* Container for the form */
+    .form-container {
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        max-width: 600px;
+        box-sizing: border-box;
+    }
+
+    /* Form title styling */
+    h2 {
+        text-align: center;
+        color: #333;
+        font-weight: 600;
+        margin-bottom: 35px;
+        position: relative;
+    }
+
+    /* Underline for the title */
+    h2::after {
+        content: '';
+        width: 60px;
+        height: 4px;
+        background: linear-gradient(135deg, #71b7e6, #9b59b6);
+        border-radius: 2px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -10px;
+    }
+
+    /* Flex container for side-by-side fields */
+    .name-fields {
+        display: flex;
+        gap: 20px;
+    }
+    
+    .name-fields .form-group {
+        flex: 1; /* Each field takes equal space */
+    }
+    
+    /* Styling for each form field group */
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    /* Label styling */
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #555;
+    }
+
+    /* Input and select field styling */
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="date"],
+    select,
+    input[type="file"] {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        box-sizing: border-box;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    /* Focus effect for input fields */
+    input:focus {
+        outline: none;
+        border-color: #8e44ad;
+        box-shadow: 0 0 8px rgba(142, 68, 173, 0.2);
+    }
+    
+    /* Styling for radio buttons and their labels */
+    .gender-options {
+        display: flex;
+        gap: 25px;
+        align-items: center;
+    }
+    
+    .gender-options label {
+        font-weight: normal;
+        cursor: pointer;
+    }
+
+    /* Styling for the terms and conditions checkbox group */
+    .terms-group {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .terms-group label {
+        font-weight: normal;
+        color: #666;
+    }
+
+    /* Submit button styling */
+    button[type="submit"] {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(135deg, #71b7e6, #9b59b6);
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: 600;
+        transition: background 0.3s ease, transform 0.2s;
+        margin-top: 10px;
+    }
+
+    /* Submit button hover effect */
+    button[type="submit"]:hover {
+        background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+        transform: translateY(-2px);
+    }
+
+    /* Password strength indicator styles */
+    .password-strength {
+        height: 8px;
+        background-color: #e0e0e0;
+        border-radius: 4px;
+        margin-top: 10px;
+        overflow: hidden; /* Ensures the inner bar has rounded corners */
+        display: flex;
+    }
+
+    /* Strength level bar styling */
+    .strength-level {
+        height: 100%;
+        border-radius: 4px;
+        transition: width 0.4s ease-in-out, background-color 0.4s ease-in-out;
+    }
+
+    /* Visual feedback styles for password strength */
+    .weak { width: 33%; background-color: #e74c3c; } /* Red */
+    .medium { width: 66%; background-color: #f39c12; } /* Orange */
+    .strong { width: 100%; background-color: #2ecc71; } /* Green */
+
+    .strength-text {
+        text-align: right;
+        font-size: 12px;
+        margin-top: 6px;
+        color: #777;
+    }
+
+    /* Responsive design for smaller screens */
+    @media (max-width: 584px) {
+        .name-fields {
+            flex-direction: column;
+            gap: 20px;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Create Your Account</h2>
+    <form id="registrationForm">
+        <!-- First and Last Name Fields -->
+        <div class="name-fields">
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" name="firstName" required>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" name="lastName" required>
+            </div>
+        </div>
+        
+        <!-- Email Address Field -->
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <!-- Password Field -->
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+            <div class="password-strength">
+                <div id="strength-level" class="strength-level"></div>
+            </div>
+            <div id="strength-text" class="strength-text"></div>
+        </div>
+
+        <!-- Confirm Password Field -->
+        <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required>
+        </div>
+
+        <!-- Date of Birth Field -->
+        <div class="form-group">
+            <label for="dob">Date of Birth</label>
+            <input type="date" id="dob" name="dob" required>
+        </div>
+
+        <!-- Gender Field -->
+        <div class="form-group">
+            <label>Gender</label>
+            <div class="gender-options">
+                <label><input type="radio" name="gender" value="male"> Male</label>
+                <label><input type="radio" name="gender" value="female"> Female</label>
+                <label><input type="radio" name="gender" value="other"> Other</label>
+            </div>
+        </div>
+
+        <!-- Profile Picture Upload -->
+        <div class="form-group">
+            <label for="profilePicture">Profile Picture</label>
+            <input type="file" id="profilePicture" name="profilePicture" accept="image/*">
+        </div>
+
+        <!-- Terms and Conditions Checkbox -->
+        <div class="form-group terms-group">
+            <input type="checkbox" id="terms" name="terms" required style="width: auto;">
+            <label for="terms">I agree to the Terms and Conditions</label>
+        </div>
+        
+        <!-- Submit Button -->
+        <button type="submit">Register</button>
+    </form>
+</div>
+
+<script>
+    const passwordInput = document.getElementById('password');
+    const strengthLevel = document.getElementById('strength-level');
+    const strengthText = document.getElementById('strength-text');
+
+    passwordInput.addEventListener('input', () => {
+        const password = passwordInput.value;
+        let strength = 0;
+        let text = '';
+        
+        if (password.length >= 8) strength++;
+        if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength++;
+        if (password.match(/[0-9]/)) strength++;
+        if (password.match(/[^a-zA-Z0-9]/)) strength++;
+
+        strengthLevel.className = 'strength-level'; // Reset classes
+
+        if (password.length === 0) {
+            text = '';
+        } else if (strength < 2) {
+            strengthLevel.classList.add('weak');
+            text = 'Weak';
+        } else if (strength < 4) {
+            strengthLevel.classList.add('medium');
+            text = 'Medium';
+        } else {
+            strengthLevel.classList.add('strong');
+            text = 'Strong';
+        }
+        strengthText.textContent = text;
+    });
+
+    document.getElementById('registrationForm').addEventListener('submit', function(event) {
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+
+        if (password !== confirmPassword) {
+            alert("Passwords do not match!");
+            event.preventDefault(); // Prevent form submission
+        }
+    });
+</script>
+
+</body>
+</html>
